@@ -3,6 +3,7 @@ import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import LogInPage from "./pages/LogInPage/LogInPage";
+import Feed from "./pages/FeedPage/Feed";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,6 +52,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<LogInPage />}></Route>
+          <Route
+            path="/feed"
+            element={<Feed profileData={profileData} />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>
