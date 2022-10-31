@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/Header/Header";
+import LogInPage from "./pages/LogInPage/LogInPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,9 +46,14 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <a href="http://localhost:8888/auth/spotify">Login via Spotify</a>
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<LogInPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
