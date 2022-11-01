@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import Feed from "./pages/FeedPage/Feed";
-
+import PostSelect from "./components/PostSelect/PostSelect";
+import "./styles/partials/_resets.scss";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileData, setProfileData] = useState(null);
@@ -49,13 +50,14 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        <Header profileData={profileData} isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path="/" element={<LogInPage />}></Route>
           <Route
             path="/feed"
             element={<Feed profileData={profileData} />}
           ></Route>
+          <Route path="/post-select" element={<PostSelect />}></Route>
         </Routes>
       </BrowserRouter>
     </>

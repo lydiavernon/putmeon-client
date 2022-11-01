@@ -1,13 +1,8 @@
-import React from "react";
+import "../FeedPage/Feed.scss";
 
 const Feed = ({ profileData }) => {
-  console.log(profileData);
   // const name = profileData.displayName;
-  return (
-    <div>
-      <h1>Welcome </h1>
-    </div>
-  );
+  return;
 };
 
 export default Feed;
