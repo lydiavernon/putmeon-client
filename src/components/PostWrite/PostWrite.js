@@ -19,7 +19,6 @@ const PostWrite = () => {
       }
     );
     SetSong(data);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -30,15 +29,19 @@ const PostWrite = () => {
     return <h1>Loading...</h1>;
   }
 
+  console.log(song);
+
   return (
     <div className="post">
-      <section className="song__info">
-        <p>You have selected: {song.track.name}</p>
-        <p>By {song.track.artists[0].name}</p>
-        <img className="song__img" src={song.track.album.images[0].url} />
-      </section>
       <form>
-        <input type="textarea" rows="100"></input>
+        <section className="song__info">
+          <p>you have selected:</p>
+          <p>{song.name}</p>
+          <p>By {song.artists[0].name}</p>
+          <img className="song__img" src={song.album.images[0].url} />
+        </section>
+        <textarea rows="15" placeholder="add a comment..."></textarea>
+        <button type="submit">POST</button>
       </form>
     </div>
   );

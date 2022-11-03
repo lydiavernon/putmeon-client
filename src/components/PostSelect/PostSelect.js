@@ -32,7 +32,10 @@ const PostSelect = ({ handleSongSelect }) => {
 
   return (
     <>
-      <input className="post__search" placeholder="search library" />
+      <input
+        className="post__search"
+        placeholder="search spotify library by song name"
+      />
       <h2>Your recently played songs</h2>
       <ul>
         {recentlyPlayed.map((song) => {

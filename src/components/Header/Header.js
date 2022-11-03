@@ -1,11 +1,9 @@
 import friendsIcon from "../../assets/icons/friends.svg";
 import "../Header/Header.scss";
 import { Link } from "react-router-dom";
+import LogOut from "../LogOut/LogOut";
 
 const Header = ({ profileData, isLoggedIn }) => {
-  // const name = profileData.displayName || "test";
-  console.log(profileData);
-
   return (
     <>
       <div className="header">
@@ -27,6 +25,7 @@ const Header = ({ profileData, isLoggedIn }) => {
               />
             </div>
           )}
+          {isLoggedIn && <LogOut />}
         </div>
       </div>
       <div className="header__nav">
