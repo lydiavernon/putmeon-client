@@ -58,7 +58,10 @@ function App() {
             element={<LogInPage isLoggedIn={isLoggedIn} />}
           ></Route>
           <Route path="/post-select" element={<PostSelect />}></Route>
-          <Route path="/post-write/:id" element={<PostWrite />}></Route>
+          <Route
+            path="/post-write/:id"
+            element={<PostWrite profileData={profileData} />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>

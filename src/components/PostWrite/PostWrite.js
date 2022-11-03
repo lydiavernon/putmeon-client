@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const PostWrite = () => {
+const PostWrite = ({ profileData }) => {
   const [song, SetSong] = useState(null);
   const { id } = useParams();
 
@@ -25,22 +25,40 @@ const PostWrite = () => {
     getSongbyId();
   }, []);
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const songId = form.song_id.value;
+    const comment = form.comment.value;
+    const userSpotifyId = profileData.id;
+
+    await axios.post("http://localhost:8888/post", {
+      song_id: songId,
+      comment: comment,
+      user_spotify_id: userSpotifyId,
+    });
+  };
+
   if (!song) {
     return <h1>Loading...</h1>;
   }
-
   console.log(song);
 
   return (
     <div className="post">
-      <form>
-        <section className="song__info">
-          <p>you have selected:</p>
-          <p>{song.name}</p>
-          <p>By {song.artists[0].name}</p>
-          <img className="song__img" src={song.album.images[0].url} />
-        </section>
-        <textarea rows="15" placeholder="add a comment..."></textarea>
+      <section className="song__info">
+        <p>you have selected:</p>
+        <p>{song.name}</p>
+        <p>By {song.artists[0].name}</p>
+        <img className="song__img" src={song.album.images[0].url} />
+      </section>
+      <form onSubmit={(e) => submitHandler(e)}>
+        <textarea
+          name="comment"
+          rows="15"
+          placeholder="add a comment..."
+        ></textarea>
+        <input type="hidden" name="song_id" value={song.id} />
         <button type="submit">POST</button>
       </form>
     </div>
