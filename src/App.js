@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import Feed from "./pages/FeedPage/Feed";
 import PostSelect from "./components/PostSelect/PostSelect";
+import PostWrite from "./components/PostWrite/PostWrite";
 import "./styles/partials/_resets.scss";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,12 +53,12 @@ function App() {
       <BrowserRouter>
         <Header profileData={profileData} isLoggedIn={isLoggedIn} />
         <Routes>
-          <Route path="/" element={<LogInPage />}></Route>
           <Route
-            path="/feed"
-            element={<Feed profileData={profileData} />}
+            path="/"
+            element={<LogInPage isLoggedIn={isLoggedIn} />}
           ></Route>
           <Route path="/post-select" element={<PostSelect />}></Route>
+          <Route path="/post-write/:id" element={<PostWrite />}></Route>
         </Routes>
       </BrowserRouter>
     </>

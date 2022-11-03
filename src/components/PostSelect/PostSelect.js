@@ -3,20 +3,22 @@ import { useEffect, useState } from "react";
 import "../PostSelect/PostSelect.scss";
 import SongItem from "../SongItem/SongItem";
 
-const PostSelect = () => {
+const PostSelect = ({ handleSongSelect }) => {
   const [recentlyPlayed, SetRecentlyPlayed] = useState(null);
 
   const getRecentlyPlayed = async () => {
+    const result = await axios.get("http://localhost:8888/token");
+
+    const token = result.data.token;
+
     const { data } = await axios.get(
       "https://api.spotify.com/v1/me/player/recently-played",
       {
         headers: {
-          Authorization:
-            "Bearer BQD7vEcWHCe5AOjCI-Ys-W6elkZoMaJdVJ574cw38XagFZVA2w6xdSffhirRUXC7M9DqHMTDG7HSJviy6PMvAzWGXCQzeyKuTLjwFiVJ_T1zxjhvmudYePYhFBwzMhymHhE4U5UtEgWMB3H6LpNH5TwN1kpJScyMM0iDGsOLeFb45m4sOXchYMGpKTkXiuL-oquO",
+          Authorization: `Bearer ${token}`,
         },
       }
     );
-    // console.log(data);
     SetRecentlyPlayed(data.items);
   };
 
@@ -24,19 +26,17 @@ const PostSelect = () => {
     getRecentlyPlayed();
   }, []);
 
-  //   console.log(recentlyPlayed);
-
   if (!recentlyPlayed) {
     return <h1>Loading...</h1>;
   }
 
   return (
     <>
-      <input placeholder="search library" />
+      <input className="post__search" placeholder="search library" />
       <h2>Your recently played songs</h2>
       <ul>
         {recentlyPlayed.map((song) => {
-          return <SongItem song={song} />;
+          return <SongItem handleSongSelect={handleSongSelect} song={song} />;
         })}
       </ul>
     </>

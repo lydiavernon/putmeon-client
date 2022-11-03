@@ -1,11 +1,11 @@
-const LogInPage = () => {
-  return (
-    <div>
-      <div className="App">
-        <a href="http://localhost:8888/auth/spotify">Login via Spotify</a>
-      </div>
-    </div>
-  );
+import Feed from "../FeedPage/Feed";
+import LogIn from "../../components/LogIn/LogIn";
+
+const LogInPage = ({ isLoggedIn }) => {
+  if (isLoggedIn) {
+    return <Feed />;
+  }
+  return <LogIn />;
 };
 
 export default LogInPage;
