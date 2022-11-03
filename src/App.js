@@ -3,7 +3,6 @@ import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import LogInPage from "./pages/LogInPage/LogInPage";
-import Feed from "./pages/FeedPage/Feed";
 import PostSelect from "./components/PostSelect/PostSelect";
 import PostWrite from "./components/PostWrite/PostWrite";
 import "./styles/partials/_resets.scss";
@@ -19,28 +18,38 @@ function App() {
       })
       .then((res) => {
         setIsLoggedIn(true);
+
+        console.log(res.data);
+
         setProfileData(res.data);
+
+        // All users (inc those without picture)
+        const userData = {
+          spotify_user_id: res.data.id,
+          name: res.data.displayName,
+        };
+
+        console.log(res.data);
+
+        // If the user has a picture, also add that
+        if (res.data.photos.length > 0) {
+          userData["avatar_url"] = res.data.photos[0].value;
+        } else {
+          userData["avatar_url"] = "";
+        }
 
         // TODO: Refactor to async/await
 
         // Create a user
         axios
-          .post(
-            `http://localhost:8888/auth/profile/create`,
-            {
-              spotify_user_id: res.data.id,
-              avatar_url: res.data.photos[0].value,
-              name: res.data.displayName,
-            },
-            {
-              withCredentials: true,
-            }
-          )
+          .post(`http://localhost:8888/auth/profile/create`, userData, {
+            withCredentials: true,
+          })
           .then((res) => {})
           .catch((err) => {});
       })
       .catch((err) => {
-        if (err.response.status === 401) {
+        if (err.status === 401) {
           setIsLoggedIn(false);
         } else {
           console.log("Error authenticating", err);

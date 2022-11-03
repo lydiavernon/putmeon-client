@@ -4,6 +4,18 @@ import { Link } from "react-router-dom";
 import LogOut from "../LogOut/LogOut";
 
 const Header = ({ profileData, isLoggedIn }) => {
+  if (!profileData) {
+    return null;
+  }
+
+  let profileImgUrl = "";
+
+  if (profileData.photos.length > 0) {
+    profileImgUrl = profileData.photos[0].value;
+  } else {
+    profileImgUrl = "https://xsgames.co/randomusers/assets/avatars/pixel/4.jpg";
+  }
+
   return (
     <>
       <div className="header">
@@ -19,10 +31,7 @@ const Header = ({ profileData, isLoggedIn }) => {
           )}
           {isLoggedIn && (
             <div className="header__profile-img-wrap">
-              <img
-                className="header__profile-img"
-                src={profileData.photos[0].value}
-              />
+              <img className="header__profile-img" src={profileImgUrl} />
             </div>
           )}
           {isLoggedIn && <LogOut />}
