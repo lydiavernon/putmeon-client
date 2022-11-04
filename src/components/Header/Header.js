@@ -2,6 +2,7 @@ import friendsIcon from "../../assets/icons/friends.svg";
 import "../Header/Header.scss";
 import { Link } from "react-router-dom";
 import LogOut from "../LogOut/LogOut";
+import profileIcon from "../../assets/icons/defaultProfile.svg";
 
 const Header = ({ profileData, isLoggedIn }) => {
   if (!profileData) {
@@ -13,16 +14,16 @@ const Header = ({ profileData, isLoggedIn }) => {
   if (profileData.photos.length > 0) {
     profileImgUrl = profileData.photos[0].value;
   } else {
-    profileImgUrl = "https://xsgames.co/randomusers/assets/avatars/pixel/4.jpg";
+    profileImgUrl = profileIcon;
   }
 
   return (
     <>
       <div className="header">
         <div className="header__friends">
-          {isLoggedIn && (
+          {/* {isLoggedIn && (
             <img className="header__friends-icon" src={friendsIcon} />
-          )}
+          )} */}
         </div>
         <h1 className="header__title">putmeon</h1>
         <div className="header__profile">

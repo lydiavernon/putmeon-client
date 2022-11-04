@@ -1,0 +1,17 @@
+@use "../../styles/partials/breakpoints" as *;
+
+.post {
+  width: 100%;
+  padding: 2.4rem;
+  margin: 2.4rem;
+  background-color: rgba($color: #fff, $alpha: 0.2);
+}
+
+.song__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-name {
+  font-weight: 600;
+}

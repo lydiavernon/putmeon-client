@@ -6,6 +6,7 @@ import LogInPage from "./pages/LogInPage/LogInPage";
 import PostSelect from "./components/PostSelect/PostSelect";
 import PostWrite from "./components/PostWrite/PostWrite";
 import "./styles/partials/_resets.scss";
+import "./styles/partials/_breakpoints.scss";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileData, setProfileData] = useState(null);

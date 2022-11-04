@@ -16,13 +16,15 @@ const Feed = () => {
   }, []);
 
   return (
-    <div>
-      <p>Welcome to your feed</p>
-      <ul>
+    <div className="feed">
+      <ul className="posts">
         {posts.map((post) => {
           return <PostItem key={post.posts.id} post={post} />;
         })}
       </ul>
+      <section className="playlist">
+        <h3 className="playlist__title">My putmeon playlist</h3>
+      </section>
     </div>
   );
 };
