@@ -12,6 +12,7 @@ const PostWrite = ({ profileData }) => {
   const getSongbyId = async () => {
     const result = await axios.get("http://localhost:8888/token");
     const token = result.data.token;
+
     const { data } = await axios.get(
       `https://api.spotify.com/v1/tracks/${id}`,
       {
@@ -46,7 +47,6 @@ const PostWrite = ({ profileData }) => {
   if (!song) {
     return <h1>Loading...</h1>;
   }
-  console.log(song);
 
   return (
     <div className="post">

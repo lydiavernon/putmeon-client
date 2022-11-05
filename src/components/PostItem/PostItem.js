@@ -4,6 +4,8 @@ import "../PostItem/PostItem.scss";
 
 const PostItem = ({ post }) => {
   const [song, SetSong] = useState(null);
+  const [showSuccess, SetShowSuccess] = useState(false);
+
   const songId = post.posts.song_id;
 
   const getSongbyId = async () => {
@@ -24,11 +26,31 @@ const PostItem = ({ post }) => {
     getSongbyId();
   }, []);
 
+  const handleSave = async (songURI) => {
+    console.log(songURI);
+    const result = await axios.get("http://localhost:8888/token");
+    const token = result.data.token;
+    await axios.post(
+      "https://api.spotify.com/v1/playlists/0vJGOHPeVJWXFXYVIca1c7/tracks",
+      {
+        uris: [songURI],
+        position: 0,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    SetShowSuccess(true);
+    setTimeout(() => {
+      SetShowSuccess(false);
+    }, 2000);
+  };
+
   if (!song) {
     return <h1>loading...</h1>;
   }
-
-  console.log(post.users);
 
   return (
     <article className="post">
@@ -41,6 +63,17 @@ const PostItem = ({ post }) => {
         <div className="song__text">
           <p className="song__name">{song.name}</p>
           <p className="song__artist">By {song.artists[0].name}</p>
+        </div>
+      </section>
+      <section className="actions">
+        <div
+          onClick={() => {
+            handleSave(song.uri);
+          }}
+          className="actions__button"
+        >
+          {!showSuccess && <p className="actions__text">SAVE</p>}
+          {showSuccess && <p>track added to your playlist!</p>}
         </div>
       </section>
     </article>

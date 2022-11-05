@@ -20,8 +20,6 @@ function App() {
       .then((res) => {
         setIsLoggedIn(true);
 
-        console.log(res.data);
-
         setProfileData(res.data);
 
         // All users (inc those without picture)
@@ -29,8 +27,6 @@ function App() {
           spotify_user_id: res.data.id,
           name: res.data.displayName,
         };
-
-        console.log(res.data);
 
         // If the user has a picture, also add that
         if (res.data.photos.length > 0) {
@@ -42,12 +38,11 @@ function App() {
         // TODO: Refactor to async/await
 
         // Create a user
-        axios
-          .post(`http://localhost:8888/auth/profile/create`, userData, {
-            withCredentials: true,
-          })
-          .then((res) => {})
-          .catch((err) => {});
+        axios.post(`http://localhost:8888/auth/profile/create`, userData, {
+          withCredentials: true,
+        });
+        // .then((res) => {})
+        // .catch((err) => {});
       })
       .catch((err) => {
         if (err.status === 401) {
@@ -61,18 +56,22 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header profileData={profileData} isLoggedIn={isLoggedIn} />
-        <Routes>
-          <Route
-            path="/"
-            element={<LogInPage isLoggedIn={isLoggedIn} />}
-          ></Route>
-          <Route path="/post-select" element={<PostSelect />}></Route>
-          <Route
-            path="/post-write/:id"
-            element={<PostWrite profileData={profileData} />}
-          ></Route>
-        </Routes>
+        <section className="app">
+          <Header profileData={profileData} isLoggedIn={isLoggedIn} />
+          <main className="main">
+            <Routes>
+              <Route
+                path="/"
+                element={<LogInPage isLoggedIn={isLoggedIn} />}
+              ></Route>
+              <Route path="/post-select" element={<PostSelect />}></Route>
+              <Route
+                path="/post-write/:id"
+                element={<PostWrite profileData={profileData} />}
+              ></Route>
+            </Routes>
+          </main>
+        </section>
       </BrowserRouter>
     </>
   );

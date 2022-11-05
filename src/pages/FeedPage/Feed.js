@@ -22,9 +22,6 @@ const Feed = () => {
           return <PostItem key={post.posts.id} post={post} />;
         })}
       </ul>
-      <section className="playlist">
-        <h3 className="playlist__title">My putmeon playlist</h3>
-      </section>
     </div>
   );
 };

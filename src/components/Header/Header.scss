@@ -1,14 +1,19 @@
 @use "../../styles/partials/variables" as *;
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: $primary-color-1;
   color: $primary-color-2;
   margin: 2.4rem;
   padding-bottom: 2.4rem;
   border-bottom: solid 2px $primary-color-3;
+
+  &__wrapper {
+    width: 20%;
+  }
+
+  &__title {
+    font-size: 3.6rem;
+  }
 
   &__friends-icon {
     height: 100%;
@@ -21,6 +26,7 @@
 
   &__profile {
     display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -41,12 +47,17 @@
   &__nav {
     padding: 0 2.4rem;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
   }
 
   &__feed,
   &__post {
     color: black;
     font-size: 2.4rem;
+    margin-bottom: 1rem;
   }
+}
+
+.playlist {
+  margin: 2.4rem;
 }

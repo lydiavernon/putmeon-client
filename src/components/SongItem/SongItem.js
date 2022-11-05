@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../SongItem/SongItem.scss";
 
 const SongItem = ({ song }) => {
-  console.log(song);
   return (
     <Link to={`/post-write/${song.track.id}`}>
       {" "}

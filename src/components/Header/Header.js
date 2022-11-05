@@ -1,8 +1,9 @@
-import friendsIcon from "../../assets/icons/friends.svg";
 import "../Header/Header.scss";
 import { Link } from "react-router-dom";
 import LogOut from "../LogOut/LogOut";
 import profileIcon from "../../assets/icons/defaultProfile.svg";
+import axios from "axios";
+import MyTracks from "../MyTracks/MyTracks";
 
 const Header = ({ profileData, isLoggedIn }) => {
   if (!profileData) {
@@ -17,14 +18,46 @@ const Header = ({ profileData, isLoggedIn }) => {
     profileImgUrl = profileIcon;
   }
 
+  const createPlaylist = async () => {
+    //checking if has playlist
+    const results = await axios.get(
+      `http://localhost:8888/users/${[profileData.id]}`
+    );
+    const hasPlaylist = results.data[0].is_verified;
+
+    //if no playlist, make one on spotify
+    if (!hasPlaylist) {
+      const result = await axios.get("http://localhost:8888/token");
+      const token = result.data.token;
+      console.log(token);
+
+      const data = {
+        name: "putmeon tracks",
+        description: "all my saved tracks from putmeon feed",
+        public: false,
+      };
+
+      await axios.post(
+        `https://api.spotify.com/v1/users/${profileData.id}/playlists`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      //update DB to set hasPlaylist to true so we dont repeat
+      await axios.put(`http://localhost:8888/users/${[profileData.id]}`);
+      console.log("playlist create!");
+    }
+  };
+
+  createPlaylist();
+
   return (
-    <>
+    <div className="header__wrapper">
       <div className="header">
-        <div className="header__friends">
-          {/* {isLoggedIn && (
-            <img className="header__friends-icon" src={friendsIcon} />
-          )} */}
-        </div>
         <h1 className="header__title">putmeon</h1>
         <div className="header__profile">
           {isLoggedIn && (
@@ -35,8 +68,8 @@ const Header = ({ profileData, isLoggedIn }) => {
               <img className="header__profile-img" src={profileImgUrl} />
             </div>
           )}
-          {isLoggedIn && <LogOut />}
         </div>
+        {isLoggedIn && <LogOut />}
       </div>
       <div className="header__nav">
         {isLoggedIn && (
@@ -50,7 +83,10 @@ const Header = ({ profileData, isLoggedIn }) => {
           </Link>
         )}
       </div>
-    </>
+      <section className="playlist">
+        <MyTracks profileData={profileData} />
+      </section>
+    </div>
   );
 };
 

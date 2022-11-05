@@ -2,15 +2,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "../PostSelect/PostSelect.scss";
 import SongItem from "../SongItem/SongItem";
+// import { token } from "../../utils/Helpers";
+import { getToken } from "../../utils/Helpers";
 
 const PostSelect = ({ handleSongSelect }) => {
   const [recentlyPlayed, SetRecentlyPlayed] = useState(null);
 
   const getRecentlyPlayed = async () => {
     const result = await axios.get("http://localhost:8888/token");
-
     const token = result.data.token;
 
+    console.log(token);
     const { data } = await axios.get(
       "https://api.spotify.com/v1/me/player/recently-played",
       {

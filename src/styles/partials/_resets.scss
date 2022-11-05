@@ -39,3 +39,12 @@ a {
 button {
   cursor: pointer;
 }
+
+.app {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main {
+  width: 80%;
+}
