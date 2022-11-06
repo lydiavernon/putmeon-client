@@ -43,8 +43,11 @@ button {
 .app {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .main {
   width: 80%;
+  position: relative;
+  left: 20%;
 }

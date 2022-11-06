@@ -1,12 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../PostItem/PostItem.scss";
+import SpotifyPlayer from "../SpotifyPlayer/SpotifyPlayer";
+import profileIcon from "../../assets/icons/defaultProfile.svg";
+import { timeSince } from "../../utils/Helpers";
 
 const PostItem = ({ post }) => {
   const [song, SetSong] = useState(null);
   const [showSuccess, SetShowSuccess] = useState(false);
+  const [token, SetToken] = useState("");
 
   const songId = post.posts.song_id;
+
+  const time = moment(post.posts.created_at).fromNow();
 
   const getSongbyId = async () => {
     const result = await axios.get("http://localhost:8888/token");
@@ -20,6 +26,7 @@ const PostItem = ({ post }) => {
       }
     );
     SetSong(data);
+    SetToken(token);
   };
 
   useEffect(() => {
@@ -55,16 +62,23 @@ const PostItem = ({ post }) => {
   return (
     <article className="post">
       <section className="user">
-        <p className="user-name">{post.users.name}</p>
+        <img
+          className="user__img"
+          src={post.users.avatar_url || profileIcon}
+        ></img>
+        <p className="user__name">{post.users.name}</p>
       </section>
-      <p className="post__comment">{post.posts.comment}</p>
+      <p className="user__timestamp">{post.posts.created_at}</p>
+      <p className="user__comment">{post.posts.comment}</p>
       <section className="song__info">
-        <img className="song__img" src={song.album.images[0].url} />
+        {/* <img className="song__img" src={song.album.images[0].url} />
         <div className="song__text">
           <p className="song__name">{song.name}</p>
           <p className="song__artist">By {song.artists[0].name}</p>
-        </div>
+        </div> */}
       </section>
+      <SpotifyPlayer song={song} />
+
       <section className="actions">
         <div
           onClick={() => {
@@ -72,8 +86,10 @@ const PostItem = ({ post }) => {
           }}
           className="actions__button"
         >
-          {!showSuccess && <p className="actions__text">SAVE</p>}
-          {showSuccess && <p>track added to your playlist!</p>}
+          {!showSuccess && <button className="actions__text">SAVE</button>}
+          {showSuccess && (
+            <p className="actions__text"> track added to your playlist!</p>
+          )}
         </div>
       </section>
     </article>

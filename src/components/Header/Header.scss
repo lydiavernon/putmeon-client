@@ -9,6 +9,8 @@
 
   &__wrapper {
     width: 20%;
+    position: fixed;
+    top: 0;
   }
 
   &__title {
@@ -35,6 +37,11 @@
     width: 50px;
     border-radius: 50%;
     margin-left: 1.6rem;
+  }
+
+  &__profile-name {
+    font-size: 2rem;
+    font-weight: 400;
   }
 
   &__profile-img {

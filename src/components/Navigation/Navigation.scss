@@ -1,0 +1,22 @@
+.nav {
+  padding: 0 2.4rem;
+  display: flex;
+  flex-direction: column;
+
+  &__feed,
+  &__post {
+    color: black;
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  &__feed--active,
+  &__post--active {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}

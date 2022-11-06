@@ -1,4 +1,46 @@
-.song__img {
-  height: 10rem;
-  width: 10rem;
+@use "../../styles/partials/variables" as *;
+
+.write {
+  margin: 4.8rem;
+  &__info {
+    display: flex;
+    margin-bottom: 2.4rem;
+  }
+  &__name {
+    padding: 0 1.6rem;
+    font-weight: bold;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__comment {
+    margin-top: 1.6rem;
+    border: solid 0.5px $primary-color-3;
+    border-radius: 10px;
+    padding: 1.6rem;
+    width: 100%;
+    resize: none;
+
+    &:focus {
+      outline: 1px solid black;
+    }
+  }
+
+  &__button {
+    border: none;
+    padding: 1.6rem;
+    font-weight: bold;
+    border-radius: 10px;
+    width: fit-content;
+    margin-top: 1.6rem;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
 }

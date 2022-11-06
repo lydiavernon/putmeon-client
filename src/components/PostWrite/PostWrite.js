@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SpotifyPlayer from "../SpotifyPlayer/SpotifyPlayer";
 
 const PostWrite = ({ profileData }) => {
   const [song, SetSong] = useState(null);
@@ -49,21 +50,24 @@ const PostWrite = ({ profileData }) => {
   }
 
   return (
-    <div className="post">
-      <section className="song__info">
+    <div className="write">
+      <section className="write__info">
         <p>you have selected:</p>
-        <p>{song.name}</p>
-        <p>By {song.artists[0].name}</p>
-        <img className="song__img" src={song.album.images[0].url} />
+        <p className="write__name">{song.name}</p>
+        <p>by {song.artists[0].name}</p>
       </section>
-      <form onSubmit={(e) => submitHandler(e)}>
+      <SpotifyPlayer song={song} />
+      <form className="write__form" onSubmit={(e) => submitHandler(e)}>
         <textarea
+          className="write__comment"
           name="comment"
           rows="15"
           placeholder="add a comment..."
         ></textarea>
         <input type="hidden" name="song_id" value={song.id} />
-        <button type="submit">POST</button>
+        <button className="write__button" type="submit">
+          POST
+        </button>
       </form>
     </div>
   );

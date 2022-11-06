@@ -4,6 +4,7 @@ import LogOut from "../LogOut/LogOut";
 import profileIcon from "../../assets/icons/defaultProfile.svg";
 import axios from "axios";
 import MyTracks from "../MyTracks/MyTracks";
+import Navigation from "../Navigation/Navigation";
 
 const Header = ({ profileData, isLoggedIn }) => {
   if (!profileData) {
@@ -71,18 +72,7 @@ const Header = ({ profileData, isLoggedIn }) => {
         </div>
         {isLoggedIn && <LogOut />}
       </div>
-      <div className="header__nav">
-        {isLoggedIn && (
-          <Link className="header__feed" to="/">
-            feed
-          </Link>
-        )}
-        {isLoggedIn && (
-          <Link className="header__post" to="/post-select">
-            post
-          </Link>
-        )}
-      </div>
+      <Navigation isLoggedIn={isLoggedIn} />
       <section className="playlist">
         <MyTracks profileData={profileData} />
       </section>

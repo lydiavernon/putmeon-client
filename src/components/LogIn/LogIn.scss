@@ -1,0 +1,31 @@
+.login {
+  margin-top: 20%;
+  margin-right: 30%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 3.6rem;
+    font-size: 3.6rem;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-weight: 600;
+    background-color: rgba($color: #000000, $alpha: 0.05);
+    padding: 1.6rem;
+    padding-bottom: 3.2rem;
+    border-radius: 20px;
+  }
+
+  &__icon {
+    width: 50px;
+    height: 50px;
+  }
+}
