@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import "../PostItem/PostItem.scss";
 import SpotifyPlayer from "../SpotifyPlayer/SpotifyPlayer";
 import profileIcon from "../../assets/icons/defaultProfile.svg";
-import { timeSince } from "../../utils/Helpers";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 
 const PostItem = ({ post }) => {
   const [song, SetSong] = useState(null);
@@ -12,7 +13,10 @@ const PostItem = ({ post }) => {
 
   const songId = post.posts.song_id;
 
-  const time = moment(post.posts.created_at).fromNow();
+  TimeAgo.addDefaultLocale(en);
+
+  // Create formatter (English).
+  const timeAgo = new TimeAgo("en-US");
 
   const getSongbyId = async () => {
     const result = await axios.get("http://localhost:8888/token");
@@ -62,13 +66,15 @@ const PostItem = ({ post }) => {
   return (
     <article className="post">
       <section className="user">
-        <img
-          className="user__img"
-          src={post.users.avatar_url || profileIcon}
-        ></img>
-        <p className="user__name">{post.users.name}</p>
+        <div className="user__wrapper">
+          <img
+            className="user__img"
+            src={post.users.avatar_url || profileIcon}
+          ></img>
+          <p className="user__name">{post.users.name}</p>
+        </div>
+        <p className="user__timestamp">{post.posts.created_at}</p>
       </section>
-      <p className="user__timestamp">{post.posts.created_at}</p>
       <p className="user__comment">{post.posts.comment}</p>
       <section className="song__info">
         {/* <img className="song__img" src={song.album.images[0].url} />

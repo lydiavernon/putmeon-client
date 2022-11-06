@@ -15,9 +15,16 @@
 
 .user {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 0.8rem;
+
+  &__wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   &__img {
     width: 30px;
     height: 30px;

@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "../PostSelect/PostSelect.scss";
 import SongItem from "../SongItem/SongItem";
-// import { token } from "../../utils/Helpers";
-import { getToken } from "../../utils/Helpers";
 
 const PostSelect = ({ handleSongSelect }) => {
   const [recentlyPlayed, SetRecentlyPlayed] = useState(null);
