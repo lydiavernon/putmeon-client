@@ -40,6 +40,9 @@
     color: $primary-color-3;
     font-size: 1.6rem;
   }
+  &__timestamp {
+    color: $primary-color-3;
+  }
 }
 
 .actions {
@@ -55,5 +58,9 @@
     color: $primary-color-3;
     font-size: 1.3rem;
     font-weight: bold;
+  }
+
+  &__text--disabled {
+    cursor: not-allowed;
   }
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PostItem from "../../components/PostItem/PostItem";
 
-const Feed = () => {
+const Feed = ({ setSongSaved }) => {
   const [posts, SetPosts] = useState([]);
 
   const getPosts = async () => {
@@ -19,7 +19,13 @@ const Feed = () => {
     <div className="feed">
       <ul className="posts">
         {posts.map((post) => {
-          return <PostItem key={post.posts.id} post={post} />;
+          return (
+            <PostItem
+              key={post.posts.id}
+              post={post}
+              setSongSaved={setSongSaved}
+            />
+          );
         })}
       </ul>
     </div>

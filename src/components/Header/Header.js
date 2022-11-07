@@ -6,7 +6,7 @@ import axios from "axios";
 import MyTracks from "../MyTracks/MyTracks";
 import Navigation from "../Navigation/Navigation";
 
-const Header = ({ profileData, isLoggedIn }) => {
+const Header = ({ profileData, isLoggedIn, songSaved, setSongSaved }) => {
   if (!profileData) {
     return null;
   }
@@ -38,7 +38,7 @@ const Header = ({ profileData, isLoggedIn }) => {
         public: false,
       };
 
-      await axios.post(
+      const createPlaylistResult = await axios.post(
         `https://api.spotify.com/v1/users/${profileData.id}/playlists`,
         data,
         {
@@ -47,6 +47,10 @@ const Header = ({ profileData, isLoggedIn }) => {
           },
         }
       );
+
+      const playlistId = createPlaylistResult.id;
+
+      // A knex query to save the ID against the user
 
       //update DB to set hasPlaylist to true so we dont repeat
       await axios.put(`http://localhost:8888/users/${[profileData.id]}`);
@@ -74,7 +78,11 @@ const Header = ({ profileData, isLoggedIn }) => {
       </div>
       <Navigation isLoggedIn={isLoggedIn} />
       <section className="playlist">
-        <MyTracks profileData={profileData} />
+        <MyTracks
+          profileData={profileData}
+          songSaved={songSaved}
+          setSongSaved={setSongSaved}
+        />
       </section>
     </div>
   );

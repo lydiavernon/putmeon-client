@@ -1,9 +1,9 @@
 import Feed from "../FeedPage/Feed";
 import LogIn from "../../components/LogIn/LogIn";
 
-const LogInPage = ({ isLoggedIn }) => {
+const LogInPage = ({ isLoggedIn, setSongSaved }) => {
   if (isLoggedIn) {
-    return <Feed />;
+    return <Feed setSongSaved={setSongSaved} />;
   }
   return <LogIn />;
 };

@@ -7,9 +7,21 @@ import PostSelect from "./components/PostSelect/PostSelect";
 import PostWrite from "./components/PostWrite/PostWrite";
 import "./styles/partials/_resets.scss";
 import "./styles/partials/_breakpoints.scss";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileData, setProfileData] = useState(null);
+  const [accessToken, setAccessToken] = useState("");
+  const [songSaved, setSongSaved] = useState(false);
+
+  useEffect(() => {
+    const getToken = async () => {
+      const result = await axios.get("http://localhost:8888/token");
+      setAccessToken(result.data.token);
+    };
+
+    getToken();
+  });
 
   useEffect(() => {
     axios
@@ -57,14 +69,27 @@ function App() {
     <>
       <BrowserRouter>
         <section className="app">
-          <Header profileData={profileData} isLoggedIn={isLoggedIn} />
+          <Header
+            profileData={profileData}
+            isLoggedIn={isLoggedIn}
+            songSaved={songSaved}
+            setSongSaved={setSongSaved}
+          />
           <main className="main">
             <Routes>
               <Route
                 path="/"
-                element={<LogInPage isLoggedIn={isLoggedIn} />}
+                element={
+                  <LogInPage
+                    isLoggedIn={isLoggedIn}
+                    setSongSaved={setSongSaved}
+                  />
+                }
               ></Route>
-              <Route path="/post-select" element={<PostSelect />}></Route>
+              <Route
+                path="/post-select"
+                element={<PostSelect accessToken={accessToken} />}
+              ></Route>
               <Route
                 path="/post-write/:id"
                 element={<PostWrite profileData={profileData} />}
