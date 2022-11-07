@@ -45,6 +45,10 @@ const PostWrite = ({ profileData }) => {
     navigate("/");
   };
 
+  const HandleCancel = () => {
+    navigate("/post-select");
+  };
+
   if (!song) {
     return <h1>Loading...</h1>;
   }
@@ -65,9 +69,14 @@ const PostWrite = ({ profileData }) => {
           placeholder="add a comment..."
         ></textarea>
         <input type="hidden" name="song_id" value={song.id} />
-        <button className="write__button" type="submit">
-          POST
-        </button>
+        <div className="buttons">
+          <button className="write__button" onClick={HandleCancel}>
+            CANCEL
+          </button>
+          <button className="write__button" type="submit">
+            POST
+          </button>
+        </div>
       </form>
     </div>
   );

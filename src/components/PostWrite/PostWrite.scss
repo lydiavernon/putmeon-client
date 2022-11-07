@@ -30,6 +30,12 @@
     }
   }
 
+  &__buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__button {
     border: none;
     padding: 1.6rem;
@@ -37,6 +43,7 @@
     border-radius: 10px;
     width: fit-content;
     margin-top: 1.6rem;
+    margin-left: 3.2rem;
 
     &:hover {
       background-color: black;

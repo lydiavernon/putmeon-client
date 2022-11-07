@@ -59,8 +59,8 @@ const PostSelect = ({ accessToken }) => {
         placeholder="search spotify library by song name"
         onFocus={() => setSongsAreShown(false)}
         onChange={(e) => getSearchResults(e)}
-        onBlur={() => {
-          setSongsAreShown(true);
+        onBlur={(e) => {
+          if (!e.target.value) setSongsAreShown(true);
         }}
       />
 
