@@ -19,6 +19,8 @@ const Header = ({ profileData, isLoggedIn, songSaved, setSongSaved }) => {
     profileImgUrl = profileIcon;
   }
 
+  console.log(profileData);
+
   const createPlaylist = async () => {
     //checking if has playlist
     const results = await axios.get(
@@ -63,7 +65,13 @@ const Header = ({ profileData, isLoggedIn, songSaved, setSongSaved }) => {
   return (
     <div className="header__wrapper">
       <div className="header">
-        <h1 className="header__title">putmeon</h1>
+        <div className="header__title-wrap">
+          <img
+            className="header__title-img"
+            src="https://cdn-icons-png.flaticon.com/512/644/644417.png"
+          />
+          <h1 className="header__title">putmeon</h1>
+        </div>
         <div className="header__profile">
           {isLoggedIn && (
             <h5 className="header__profile-name">{profileData.displayName}</h5>

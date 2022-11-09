@@ -1,7 +1,6 @@
 @use "../../styles/partials/variables" as *;
 
 .header {
-  background-color: $primary-color-1;
   color: $primary-color-2;
   margin: 2.4rem;
   padding-bottom: 2.4rem;
@@ -13,8 +12,19 @@
     top: 0;
   }
 
+  &__title-wrap {
+    display: flex;
+  }
+
   &__title {
     font-size: 3.6rem;
+    font-weight: 100;
+    color: #cc4125;
+    margin-left: 1.6rem;
+  }
+
+  &__title-img {
+    width: 3.6rem;
   }
 
   &__friends-icon {

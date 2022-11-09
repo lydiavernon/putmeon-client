@@ -27,9 +27,9 @@ const MyTracks = ({ songSaved, setSongSaved }) => {
 
   return (
     <div>
-      <h3 className="track__title">My Saved Tracks</h3>
+      <h3 className="track__title">my playlist</h3>
       <ul>
-        {tracks.length === 0 && <p>Start saving songs to fill playlist</p>}
+        {tracks.length === 0 && <p>Start saving songs to fill your playlist</p>}
         {tracks.map((track) => {
           return (
             <li key={track.track.id} className="track__item">

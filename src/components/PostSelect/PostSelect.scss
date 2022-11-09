@@ -5,5 +5,9 @@
     height: 3.6rem;
     border: none;
     padding: 1rem;
+
+    &:focus {
+      outline: black;
+    }
   }
 }
