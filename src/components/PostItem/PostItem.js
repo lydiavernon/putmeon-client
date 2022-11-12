@@ -30,7 +30,6 @@ const PostItem = ({ post, setSongSaved }) => {
   }, [songId]);
 
   const handleSave = async (songURI) => {
-    console.log(songURI);
     const result = await axios.get("http://localhost:8888/token");
     const token = result.data.token;
     await axios.post(

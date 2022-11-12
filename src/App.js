@@ -25,7 +25,6 @@ function App() {
 
   useEffect(() => {
     axios
-      // USE Create react app's .env to put the backend url in a env variable
       .get(`http://localhost:8888/auth/profile`, {
         withCredentials: true,
       })
@@ -47,14 +46,10 @@ function App() {
           userData["avatar_url"] = "";
         }
 
-        // TODO: Refactor to async/await
-
         // Create a user
         axios.post(`http://localhost:8888/auth/profile/create`, userData, {
           withCredentials: true,
         });
-        // .then((res) => {})
-        // .catch((err) => {});
       })
       .catch((err) => {
         if (err.status === 401) {

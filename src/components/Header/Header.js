@@ -19,8 +19,6 @@ const Header = ({ profileData, isLoggedIn, songSaved, setSongSaved }) => {
     profileImgUrl = profileIcon;
   }
 
-  console.log(profileData);
-
   const createPlaylist = async () => {
     //checking if has playlist
     const results = await axios.get(
@@ -32,7 +30,6 @@ const Header = ({ profileData, isLoggedIn, songSaved, setSongSaved }) => {
     if (!hasPlaylist) {
       const result = await axios.get("http://localhost:8888/token");
       const token = result.data.token;
-      console.log(token);
 
       const data = {
         name: "putmeon tracks",
@@ -56,7 +53,6 @@ const Header = ({ profileData, isLoggedIn, songSaved, setSongSaved }) => {
 
       //update DB to set hasPlaylist to true so we dont repeat
       await axios.put(`http://localhost:8888/users/${[profileData.id]}`);
-      console.log("playlist create!");
     }
   };
 
